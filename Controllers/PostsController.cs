@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace blog_net_core.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("posts/[controller]")]
     [ApiController]
     public class PostsController : ControllerBase
     {
