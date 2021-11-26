@@ -1,4 +1,5 @@
 using blog_net_core.EF;
+using blog_net_core.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +29,7 @@ namespace blog_net_core
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddTransient<IBlogService, blogService>();
             services.AddDbContext<BLOGContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("LocalDB")));
         }

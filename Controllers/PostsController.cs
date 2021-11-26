@@ -1,5 +1,6 @@
 ﻿using blog_net_core.EF;
 using blog_net_core.Models;
+using blog_net_core.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,113 +10,63 @@ using System.Threading.Tasks;
 
 namespace blog_net_core.Controllers
 {
-    [Route("posts/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class PostsController : ControllerBase
     {
-        private BLOGContext _context;
-        public PostsController(BLOGContext context)
+        private readonly IBlogService _blogService;
+
+        public PostsController(IBlogService blogService)
         {
-            _context = context;
+            _blogService = blogService;
         }
 
-        [Route("GetAll")]
+        [Route("")]
         [HttpGet]
         public IActionResult GetAll()
         {
-
-            var posts = _context.Posts.ToList();
+            var posts = _blogService.getAllPosts();
             return Ok(posts);
         }
 
-        [Route("Get/{postId}")]
+        [Route("{postId}")]
         [HttpGet]
         public IActionResult Get(int postId)
         {
-            var post = _context.Posts.Find(postId);
-            if(post is null)
-            {
-                return BadRequest("No Data Was Found!");
-            }
+            var post = _blogService.getPostById(postId); 
             return Ok(post);
         }
 
-        [Route("Create")]
+        [Route("post")]
         [HttpPost]
         public IActionResult Create(PostModel model)
         {
-
-            Posts post = new Posts();
-            post.PostName = model.postName;
-            post.PostDescription = model.postDescription;
-            post.CreatedAt = DateTime.Today;
-            _context.Add(post);
-            _context.SaveChanges();
-
+            var post = _blogService.createPost(model);
             return Ok(post);
         }
 
-        [Route("Update")]
+        [Route("update")]
         [HttpPut]
         public IActionResult Update(PostModel model)
         {
-            if (model.postId ==0)
-            {
-                return BadRequest("No ID Specified.");
-            }
-            var post = _context.Posts.Find(model.postId);
-
-            if(post is null)
-            {
-                return BadRequest("Bad ID Specified.");
-            }
-
-            post.PostName = model.postName;
-            post.PostDescription = model.postDescription;
-            post.UpdatedAt = DateTime.Today;
-            _context.Attach(post);
-            _context.SaveChanges();
-            
+            var post = _blogService.updatePost(model);
             return Ok(post);
-
         }
         
-        [Route("DeleteBD/{postId}")]
+        [Route("delete-bd/{postId}")]
         [HttpDelete]
         public IActionResult Delete(int postId)
         {
-            var post = _context.Posts.Find(postId);
-            if (post is null)
-            {
-                return BadRequest("No Data Was Found!");
-            }
-            _context.Remove(post);
-            _context.SaveChanges();
-            
+            var post = _blogService.deleteById(postId);
             return Ok(post);
         }
 
-        [Route("SoftDelete")]
-        [HttpPut]
+        [Route("soft-delete")]
+        [HttpDelete]
         public IActionResult SoftDelete(PostModel model)
         {
-            if (model.postId == 0)
-            {
-                return BadRequest("No ID Specified.");
-            }
-            var post = _context.Posts.Find(model.postId);
-
-            if (post is null)
-            {
-                return BadRequest("Bad ID Specified.");
-            }
-
-            post.DeletedAt = DateTime.Today;
-            _context.Attach(post);
-            _context.SaveChanges();
-
+            var post = _blogService.softDelete(model);
             return Ok(post);
-
         }
 
     }
