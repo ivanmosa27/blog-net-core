@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace blog_net_core.Services
 {
     //Interfaz del servicio para poder inyectar en controlador.
-    public interface IBlogService
+    public interface IPostService
     {
         List<Posts> getAllPosts();
         Posts getPostById(int id);

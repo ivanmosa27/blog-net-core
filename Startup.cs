@@ -29,8 +29,8 @@ namespace blog_net_core
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddTransient<IBlogService, blogService>();
-            services.AddDbContext<BLOGContext>(options =>
+            services.AddTransient<IPostService, postService>();
+            services.AddDbContext<PostsContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("LocalDB")));
         }
 

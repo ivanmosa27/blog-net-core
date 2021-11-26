@@ -14,18 +14,18 @@ namespace blog_net_core.Controllers
     [ApiController]
     public class PostsController : ControllerBase
     {
-        private readonly IBlogService _blogService;
+        private readonly IPostService _postService;
 
-        public PostsController(IBlogService blogService)
+        public PostsController(IPostService postService)
         {
-            _blogService = blogService;
+            _postService = postService;
         }
 
         [Route("")]
         [HttpGet]
         public IActionResult GetAll()
         {
-            var posts = _blogService.getAllPosts();
+            var posts = _postService.getAllPosts();
             return Ok(posts);
         }
 
@@ -33,7 +33,7 @@ namespace blog_net_core.Controllers
         [HttpGet]
         public IActionResult Get(int postId)
         {
-            var post = _blogService.getPostById(postId); 
+            var post = _postService.getPostById(postId); 
             return Ok(post);
         }
 
@@ -41,7 +41,7 @@ namespace blog_net_core.Controllers
         [HttpPost]
         public IActionResult Create(PostModel model)
         {
-            var post = _blogService.createPost(model);
+            var post = _postService.createPost(model);
             return Ok(post);
         }
 
@@ -49,7 +49,7 @@ namespace blog_net_core.Controllers
         [HttpPut]
         public IActionResult Update(PostModel model)
         {
-            var post = _blogService.updatePost(model);
+            var post = _postService.updatePost(model);
             return Ok(post);
         }
         
@@ -57,7 +57,7 @@ namespace blog_net_core.Controllers
         [HttpDelete]
         public IActionResult Delete(int postId)
         {
-            var post = _blogService.deleteById(postId);
+            var post = _postService.deleteById(postId);
             return Ok(post);
         }
 
@@ -65,7 +65,7 @@ namespace blog_net_core.Controllers
         [HttpDelete]
         public IActionResult SoftDelete(PostModel model)
         {
-            var post = _blogService.softDelete(model);
+            var post = _postService.softDelete(model);
             return Ok(post);
         }
 

@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace blog_net_core.Services{
 
-    public class blogService : IBlogService{
+    public class postService : IPostService{
 
-        private readonly BLOGContext _context;
+        private readonly PostsContext _context;
 
-        public blogService(BLOGContext context){
+        public postService(PostsContext context){
 
                 _context = context;
         }

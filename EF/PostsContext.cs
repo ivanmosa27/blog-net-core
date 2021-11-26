@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace blog_net_core.EF
 {
-    public partial class BLOGContext : DbContext
+    public partial class PostsContext : DbContext
     {
-        public BLOGContext()
+        public PostsContext()
         {
         }
 
-        public BLOGContext(DbContextOptions<BLOGContext> options)
+        public PostsContext(DbContextOptions<PostsContext> options)
             : base(options)
         {
         }
