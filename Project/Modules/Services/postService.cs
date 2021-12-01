@@ -1,5 +1,5 @@
-using blog_net_core.Project.EF;
-using blog_net_core.Project.Models;
+using blog_net_core.Project.Modules.Model.Entities;
+using blog_net_core.Project.Modules.Model.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace blog_net_core.Project.Services{
+namespace blog_net_core.Project.Modules.Services{
 
     public class postService : IPostService{
 

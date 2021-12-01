@@ -1,8 +1,9 @@
 ﻿using System;
+using blog_net_core.Project.Modules.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace blog_net_core.Project.EF
+namespace blog_net_core.Project.Modules.Model.Entities
 {
     public partial class PostsContext : DbContext
     {
