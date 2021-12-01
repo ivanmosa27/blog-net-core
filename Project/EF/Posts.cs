@@ -5,7 +5,7 @@ using System.Collections.Generic;
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace blog_net_core.EF
+namespace blog_net_core.Project.EF
 {
     public partial class Posts
     {

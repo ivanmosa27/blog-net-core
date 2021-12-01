@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace blog_net_core.EF
+namespace blog_net_core.Project.EF
 {
     public partial class PostsContext : DbContext
     {

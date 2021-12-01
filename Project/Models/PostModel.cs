@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace blog_net_core.Models
+namespace blog_net_core.Project.Models
 {
     
     public class PostModel

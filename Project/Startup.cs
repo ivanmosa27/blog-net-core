@@ -1,5 +1,5 @@
-using blog_net_core.EF;
-using blog_net_core.Services;
+using blog_net_core.Project.EF;
+using blog_net_core.Project.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
