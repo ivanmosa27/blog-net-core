@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.OpenApi.Models;
 
 namespace blog_net_core
 {
@@ -32,6 +33,19 @@ namespace blog_net_core
             services.AddTransient<IPostService, postService>();
             services.AddDbContext<PostsContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("LocalDB")));
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Blog API",
+                    Description = "Ejercicio Blog y Posts"
+
+});
+                
+
+            });
+                
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +55,14 @@ namespace blog_net_core
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            //Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json","BLOG V1");
+            });
 
             app.UseHttpsRedirection();
 
