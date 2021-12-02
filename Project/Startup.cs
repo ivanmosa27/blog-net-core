@@ -1,4 +1,4 @@
-using blog_net_core.Project.Modules.Model.Entities;
+using blog_net_core.Project.Modules.Model.Entities.Posts;
 using blog_net_core.Project.Modules.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,7 +31,7 @@ namespace blog_net_core
         {
             services.AddControllers();
             services.AddTransient<IPostService, postService>();
-            services.AddDbContext<PostsContext>(options =>
+            services.AddDbContext<PostContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("LocalDB")));
             services.AddSwaggerGen(c =>
             {

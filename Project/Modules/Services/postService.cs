@@ -1,4 +1,4 @@
-using blog_net_core.Project.Modules.Model.Entities;
+using blog_net_core.Project.Modules.Model.Entities.Posts;
 using blog_net_core.Project.Modules.Model.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,29 +11,30 @@ namespace blog_net_core.Project.Modules.Services{
 
     public class postService : IPostService{
 
-        private readonly PostsContext _context;
+        private readonly PostContext _context;
 
-        public postService(PostsContext context){
+        public postService(PostContext context){
 
                 _context = context;
         }
 
-            public  List<Posts> getAllPosts(){
+            public  List<Post> getAllPosts(){
 
                     return _context.Posts.ToList();
+                    
 
             }
 
-            public Posts getPostById(int id){
+            public Post getPostById(int id){
 
                     var post = _context.Posts.Find(id); 
                     return post;
                     
             }
 
-            public Posts createPost(PostModel model){
+            public Post createPost(PostModel model){
 
-                Posts post = new Posts();
+                Post post = new Post();
                 post.PostName = model.postName;
                 post.PostDescription = model.postDescription;
                 post.CreatedAt = DateTime.Today;
@@ -44,7 +45,7 @@ namespace blog_net_core.Project.Modules.Services{
 
             }
 
-            public Posts updatePost(PostModel model){
+            public Post updatePost(PostModel model){
 
                 var post = _context.Posts.Find(model.postId);
 
@@ -58,7 +59,7 @@ namespace blog_net_core.Project.Modules.Services{
 
             }
 
-            public Posts deleteById(int id){
+            public Post deleteById(int id){
 
                 var post = _context.Posts.Find(id);
                 
@@ -69,7 +70,7 @@ namespace blog_net_core.Project.Modules.Services{
 
             }
 
-            public Posts softDelete(PostModel model){
+            public Post softDelete(PostModel model){
 
             var post = _context.Posts.Find(model.postId);
 

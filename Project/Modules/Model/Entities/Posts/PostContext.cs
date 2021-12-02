@@ -1,22 +1,24 @@
 ﻿using System;
-using blog_net_core.Project.Modules.Model.Entities;
+using blog_net_core.Project.Modules.Model.Entities.Posts;
+using blog_net_core.Project.Modules.Model.Entities.Blogs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace blog_net_core.Project.Modules.Model.Entities
+namespace blog_net_core.Project.Modules.Model.Entities.Posts
 {
-    public partial class PostsContext : DbContext
+    public partial class PostContext : DbContext
     {
-        public PostsContext()
+        public PostContext()
         {
         }
 
-        public PostsContext(DbContextOptions<PostsContext> options)
+        public PostContext(DbContextOptions<PostContext> options)
             : base(options)
         {
         }
 
-        public virtual DbSet<Posts> Posts { get; set; }
+        public virtual DbSet<Post> Posts { get; set; }
+        public virtual DbSet<Blog> blogs {get;set;}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -28,7 +30,7 @@ namespace blog_net_core.Project.Modules.Model.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Posts>(entity =>
+            modelBuilder.Entity<Post>(entity =>
             {
                 entity.HasKey(e => e.PostId);
 
