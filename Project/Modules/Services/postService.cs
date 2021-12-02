@@ -1,5 +1,5 @@
-using blog_net_core.Project.Modules.Model.Entities.Posts;
-using blog_net_core.Project.Modules.Model.Repositories;
+using Microsoft.EntityFrameworkCore;
+using blog_net_core.Project.Modules.Model.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,77 +11,46 @@ namespace blog_net_core.Project.Modules.Services{
 
     public class postService : IPostService{
 
-        private readonly PostContext _context;
+        private readonly ApplicationDbContext _dbContext;
 
-        public postService(PostContext context){
+        public postService(ApplicationDbContext dbContext)
+        {
 
-                _context = context;
+            _dbContext = dbContext;
         }
 
-            public  List<Post> getAllPosts(){
+        public async Task<List<Post>> getAllPosts()
+        {
+            return await _dbContext.Posts.ToListAsync();
+        }
 
-                    return _context.Posts.ToList();
-                    
+        public async Task<Post> getPostById(int postId)
+        {
+            return await _dbContext.Posts.FirstOrDefaultAsync(x => x.PostId == postId);    
+        }
 
-            }
-
-            public Post getPostById(int id){
-
-                    var post = _context.Posts.Find(id); 
-                    return post;
-                    
-            }
-
-            public Post createPost(PostModel model){
-
-                Post post = new Post();
-                post.PostName = model.postName;
-                post.PostDescription = model.postDescription;
-                post.CreatedAt = DateTime.Today;
-                _context.Add(post);
-                _context.SaveChanges();
-
-                return post;
-
-            }
-
-            public Post updatePost(PostModel model){
-
-                var post = _context.Posts.Find(model.postId);
-
-                post.PostName = model.postName;
-                post.PostDescription = model.postDescription;
-                post.UpdatedAt = DateTime.Today;
-                _context.Attach(post);
-                _context.SaveChanges();
-
-                return post;
-
-            }
-
-            public Post deleteById(int id){
-
-                var post = _context.Posts.Find(id);
-                
-                _context.Remove(post);
-                _context.SaveChanges();
-
-                return post;
-
-            }
-
-            public Post softDelete(PostModel model){
-
-            var post = _context.Posts.Find(model.postId);
-
-            post.DeletedAt = DateTime.Today;
-            _context.Attach(post);
-            _context.SaveChanges();
-
+        public async Task<Post> addPost(Post post)
+        {
+            _dbContext.Add(post);
+            post.CreatedAt = DateTime.Today;
+            await _dbContext.SaveChangesAsync();
             return post;
-            }
+        }
 
+        public async Task<Post> updatePost(Post post, int id)
+        {
+            _dbContext.Update(post);
+            post.UpdatedAt = DateTime.Today;
+            await _dbContext.SaveChangesAsync();
+            return post;
+        }
+        public async Task<Post> delete(int id)
+        {
+            var post = await _dbContext.Posts.FirstOrDefaultAsync(x => x.PostId == id);
+            post.DeletedAt = DateTime.Today;
+            _dbContext.Update(post);
+            await _dbContext.SaveChangesAsync();
+            return post;
+        }
     }
-
-
 }

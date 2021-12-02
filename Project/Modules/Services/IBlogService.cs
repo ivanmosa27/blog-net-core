@@ -4,17 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using blog_net_core.Project.Modules.Model.Entities;
-using Microsoft.AspNetCore.Mvc;
 
 namespace blog_net_core.Project.Modules.Services
 {
     //Interfaz del servicio para poder inyectar en controlador.
-    public interface IPostService
+    public interface IBlogService
     {
-        Task<List<Post>> getAllPosts();
-        Task<Post> getPostById(int postId);
-        Task<Post> addPost(Post post);
-        Task<Post> updatePost(Post post,int id);
-        Task<Post> delete(int id);
+        Task<Blog> getBlogById(int id);
+        Task<String> createBlog(Blog blog);
+
     }
 }

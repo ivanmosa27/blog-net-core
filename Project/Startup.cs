@@ -1,4 +1,3 @@
-using blog_net_core.Project.Modules.Model.Entities.Posts;
 using blog_net_core.Project.Modules.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.OpenApi.Models;
+using blog_net_core.Project;
 
 namespace blog_net_core
 {
@@ -29,9 +29,11 @@ namespace blog_net_core
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(x =>
+                x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddTransient<IPostService, postService>();
-            services.AddDbContext<PostContext>(options =>
+            services.AddTransient<IBlogService, blogService>();
+            services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("LocalDB")));
             services.AddSwaggerGen(c =>
             {

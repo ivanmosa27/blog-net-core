@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using blog_net_core.Project.Modules.Model.Entities.Blogs;
+using blog_net_core.Project.Modules.Model.Entities;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace blog_net_core.Project.Modules.Model.Entities.Posts
+namespace blog_net_core.Project.Modules.Model.Entities
 {
     public partial class Post
     {
