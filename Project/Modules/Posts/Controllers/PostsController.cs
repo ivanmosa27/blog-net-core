@@ -1,6 +1,6 @@
 ﻿using blog_net_core.Project;
-using blog_net_core.Project.Modules.Model.Entities;
-using blog_net_core.Project.Modules.Services;
+using blog_net_core.Project.Modules.Posts.Model.Entities;
+using blog_net_core.Project.Modules.Posts.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace blog_net_core.Controllers
 {
-    [Route("[controller]")]
+    [Route("posts")]
     [ApiController]
     public class PostsController : ControllerBase
     {
@@ -22,7 +22,6 @@ namespace blog_net_core.Controllers
             _postService = postService;
         }
 
-        [Route("")]
         [HttpGet]
         public async Task<ActionResult<List<Post>>> GetAll()
         {
@@ -30,17 +29,13 @@ namespace blog_net_core.Controllers
             return Ok(posts);
         }
 
-        [Route("{postId}")]
+        [Route("getFirstOrDefault")]
         [HttpGet]
-
         public async Task<ActionResult> Get(int postId)
         {
             var post = await _postService.getPostById(postId); 
             return Ok(post);
         }
-
-    
-        [Route("create")]
         [HttpPost]
          public async Task<ActionResult> Create(Post post)
         {
@@ -48,14 +43,14 @@ namespace blog_net_core.Controllers
                 return Ok(postCreated);
 
         }
-        [HttpPut("{id:int}")]
+        [HttpPut]
         public async Task<ActionResult> Update(Post post, int id)
         {
             var postUpdated = await _postService.updatePost(post,id);
             return Ok(postUpdated);
             
         }
-        [HttpDelete("{postId:int}")]
+        [HttpDelete]
         public async Task<ActionResult> SoftDelete(int postId)
         {
             var post = await _postService.delete(postId);

@@ -1,5 +1,6 @@
 using System;
-using blog_net_core.Project.Modules.Model.Entities;
+using blog_net_core.Project.Modules.Posts.Model.Entities;
+using blog_net_core.Project.Modules.Blogs.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 

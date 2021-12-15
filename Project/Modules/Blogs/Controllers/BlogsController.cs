@@ -1,5 +1,5 @@
-using blog_net_core.Project.Modules.Model.Entities;
-using blog_net_core.Project.Modules.Services;
+using blog_net_core.Project.Modules.Blogs.Model.Entities;
+using blog_net_core.Project.Modules.Blogs.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace blog_net_core.Controllers
 {
-    [Route("[controller]")]
+    [Route("blogs")]
     [ApiController]
     public class BlogsController : ControllerBase
     {
@@ -19,14 +19,12 @@ namespace blog_net_core.Controllers
         {
             _blogService = blogService;
         }
-        [HttpGet("{id:int}")]
+        [HttpGet]
         public async Task<ActionResult> Get(int id)
         {
             var blog = await _blogService.getBlogById(id); 
             return Ok(blog);
         }
-
-        [Route("blog")]
         [HttpPost]
         public async Task<ActionResult> Create(Blog blog)
         {

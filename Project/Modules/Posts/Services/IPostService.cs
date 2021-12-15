@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using blog_net_core.Project.Modules.Model.Entities;
+using blog_net_core.Project.Modules.Posts.Model.Entities;
 using Microsoft.AspNetCore.Mvc;
 
-namespace blog_net_core.Project.Modules.Services
+namespace blog_net_core.Project.Modules.Posts.Services
 {
     //Interfaz del servicio para poder inyectar en controlador.
     public interface IPostService

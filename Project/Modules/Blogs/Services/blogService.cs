@@ -1,4 +1,4 @@
-using blog_net_core.Project.Modules.Model.Entities;
+using blog_net_core.Project.Modules.Blogs.Model.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace blog_net_core.Project.Modules.Services{
+namespace blog_net_core.Project.Modules.Blogs.Services{
 
     public class blogService : IBlogService{
 
