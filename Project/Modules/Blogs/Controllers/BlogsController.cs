@@ -15,11 +15,20 @@ namespace blog_net_core.Controllers
     {
         private readonly IBlogService _blogService;
 
+        /// <summary>
+        /// The constructor of the BlogController.
+        /// </summary>
+        /// <param name="blogService"></param>
         public BlogsController(IBlogService blogService)
         {
             _blogService = blogService;
         }
 
+        /// <summary>
+        /// Get all Blogs.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Route("{id:int}")]
         [HttpGet]
         public async Task<ActionResult> Get(int id)
@@ -28,6 +37,11 @@ namespace blog_net_core.Controllers
             return Ok(blog);
         }
 
+        /// <summary>
+        /// Create a new Blog.
+        /// </summary>
+        /// <param name="blog"></param>
+        /// <returns></returns>
         [Route("")]
         [HttpPost]
         public async Task<ActionResult> Create(Blog blog)

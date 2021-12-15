@@ -16,12 +16,20 @@ namespace blog_net_core.Controllers
     public class PostsController : ControllerBase
     {
         private readonly IPostService _postService;
-            
+        
+        /// <summary>
+        /// The constructor of the PostController.
+        /// </summary>
+        /// <param name="postService"></param>
         public PostsController(IPostService postService)
         {
             _postService = postService;
         }
 
+        /// <summary>
+        /// Get all posts.
+        /// </summary>
+        /// <returns></returns>
         [Route("")]
         [HttpGet]
         public async Task<ActionResult<List<Post>>> GetAll()
@@ -30,6 +38,11 @@ namespace blog_net_core.Controllers
             return Ok(posts);
         }
 
+        /// <summary>
+        /// Get Post by ID.
+        /// </summary>
+        /// <param name="postId"></param>
+        /// <returns></returns>
         [Route("{postId:int}")]
         [HttpGet]
         public async Task<ActionResult> Get(int postId)
@@ -38,15 +51,26 @@ namespace blog_net_core.Controllers
             return Ok(post);
         }
 
+        /// <summary>
+        /// Create a new Post.
+        /// </summary>
+        /// <param name="post"></param>
+        /// <returns></returns>
         [Route("")]
         [HttpPost]
          public async Task<ActionResult> Create(Post post)
         {
-                var postCreated = await _postService.addPost(post);
-                return Ok(postCreated);
+            var postCreated = await _postService.addPost(post);
+            return Ok(postCreated);
 
         }
 
+        /// <summary>
+        /// Update Post by ID.
+        /// </summary>
+        /// <param name="post"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Route("")]
         [HttpPut]
         public async Task<ActionResult> Update(Post post, int id)
@@ -56,6 +80,11 @@ namespace blog_net_core.Controllers
             
         }
 
+        /// <summary>
+        /// Delete Post by ID.
+        /// </summary>
+        /// <param name="postId"></param>
+        /// <returns></returns>
         [Route("")]
         [HttpDelete]
         public async Task<ActionResult> SoftDelete(int postId)
