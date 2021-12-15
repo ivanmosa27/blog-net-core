@@ -19,12 +19,16 @@ namespace blog_net_core.Controllers
         {
             _blogService = blogService;
         }
+
+        [Route("{id:int}")]
         [HttpGet]
         public async Task<ActionResult> Get(int id)
         {
             var blog = await _blogService.getBlogById(id); 
             return Ok(blog);
         }
+
+        [Route("")]
         [HttpPost]
         public async Task<ActionResult> Create(Blog blog)
         {

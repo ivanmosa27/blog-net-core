@@ -28,7 +28,7 @@ namespace blog_net_core.Project.Modules.Posts.Services{
         {
             return await _dbContext.Posts.FirstOrDefaultAsync(x => x.PostId == postId);    
         }
-
+        
         public async Task<Post> addPost(Post post)
         {
             _dbContext.Add(post);

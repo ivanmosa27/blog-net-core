@@ -22,6 +22,7 @@ namespace blog_net_core.Controllers
             _postService = postService;
         }
 
+        [Route("")]
         [HttpGet]
         public async Task<ActionResult<List<Post>>> GetAll()
         {
@@ -29,13 +30,15 @@ namespace blog_net_core.Controllers
             return Ok(posts);
         }
 
-        [Route("getFirstOrDefault")]
+        [Route("{postId:int}")]
         [HttpGet]
         public async Task<ActionResult> Get(int postId)
         {
             var post = await _postService.getPostById(postId); 
             return Ok(post);
         }
+
+        [Route("")]
         [HttpPost]
          public async Task<ActionResult> Create(Post post)
         {
@@ -43,6 +46,8 @@ namespace blog_net_core.Controllers
                 return Ok(postCreated);
 
         }
+
+        [Route("")]
         [HttpPut]
         public async Task<ActionResult> Update(Post post, int id)
         {
@@ -50,6 +55,8 @@ namespace blog_net_core.Controllers
             return Ok(postUpdated);
             
         }
+
+        [Route("")]
         [HttpDelete]
         public async Task<ActionResult> SoftDelete(int postId)
         {
