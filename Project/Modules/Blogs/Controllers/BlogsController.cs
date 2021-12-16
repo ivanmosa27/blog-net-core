@@ -31,7 +31,7 @@ namespace blog_net_core.Controllers
         /// <returns></returns>
         [Route("{id:int}")]
         [HttpGet]
-        public async Task<ActionResult> Get(int id)
+        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> Get(int id)
         {
             var blog = await _blogService.getBlogById(id); 
             return Ok(blog);
@@ -44,7 +44,7 @@ namespace blog_net_core.Controllers
         /// <returns></returns>
         [Route("")]
         [HttpPost]
-        public async Task<ActionResult> Create(Blog blog)
+        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> Create(Blog blog)
         {
             var blogCreated = await _blogService.createBlog(blog);
             return Ok(blogCreated);

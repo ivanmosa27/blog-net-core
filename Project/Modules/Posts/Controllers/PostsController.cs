@@ -45,7 +45,7 @@ namespace blog_net_core.Controllers
         /// <returns></returns>
         [Route("{postId:int}")]
         [HttpGet]
-        public async Task<ActionResult> Get(int postId)
+        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> Get(int postId)
         {
             var post = await _postService.getPostById(postId); 
             return Ok(post);
@@ -58,7 +58,7 @@ namespace blog_net_core.Controllers
         /// <returns></returns>
         [Route("")]
         [HttpPost]
-         public async Task<ActionResult> Create(Post post)
+         public async Task<Microsoft.AspNetCore.Mvc.ActionResult> Create(Post post)
         {
             var postCreated = await _postService.addPost(post);
             return Ok(postCreated);
@@ -73,7 +73,7 @@ namespace blog_net_core.Controllers
         /// <returns></returns>
         [Route("")]
         [HttpPut]
-        public async Task<ActionResult> Update(Post post, int id)
+        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> Update(Post post, int id)
         {
             var postUpdated = await _postService.updatePost(post,id);
             return Ok(postUpdated);
@@ -87,7 +87,7 @@ namespace blog_net_core.Controllers
         /// <returns></returns>
         [Route("")]
         [HttpDelete]
-        public async Task<ActionResult> SoftDelete(int postId)
+        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> SoftDelete(int postId)
         {
             var post = await _postService.delete(postId);
             return Ok(post);
