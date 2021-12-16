@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using blog_net_core.Project.Modules.Posts.Model.Entities;
+using blog_net_core.Project.Modules.Posts.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace blog_net_core.Project.Modules.Posts.Services
@@ -29,7 +30,7 @@ namespace blog_net_core.Project.Modules.Posts.Services
         /// </summary>
         /// <param name="post"></param>
         /// <returns></returns>
-        Task<Post> addPost(Post post);
+        Task<Post> addPost(CreatePostDto createPostDto);
 
         /// <summary>
         /// Update post from BD.

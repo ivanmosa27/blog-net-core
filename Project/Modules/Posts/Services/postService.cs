@@ -1,22 +1,26 @@
 using Microsoft.EntityFrameworkCore;
 using blog_net_core.Project.Modules.Posts.Model.Entities;
+using blog_net_core.Project.Modules.Posts.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace blog_net_core.Project.Modules.Posts.Services{
 
     public class postService : IPostService{
 
         private readonly ApplicationDbContext _dbContext;
+        private readonly IMapper mapper;
 
-        public postService(ApplicationDbContext dbContext)
+        public postService(ApplicationDbContext dbContext, IMapper mapper)
         {
 
             _dbContext = dbContext;
+            this.mapper = mapper;
         }
 
         public async Task<List<Post>> getAllPosts()
@@ -29,8 +33,9 @@ namespace blog_net_core.Project.Modules.Posts.Services{
             return await _dbContext.Posts.FirstOrDefaultAsync(x => x.PostId == postId);    
         }
         
-        public async Task<Post> addPost(Post post)
+        public async Task<Post> addPost(CreatePostDto createPostDto)
         {
+            var post = mapper.Map<Post>(createPostDto);
             _dbContext.Add(post);
             post.CreatedAt = DateTime.Today;
             await _dbContext.SaveChangesAsync();

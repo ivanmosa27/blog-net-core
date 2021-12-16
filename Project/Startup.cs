@@ -44,10 +44,12 @@ namespace blog_net_core
                     Title = "Blog API",
                     Description = "Ejercicio Blog y Posts"
 
-});
+            });
                 
 
             });
+            
+            services.AddAutoMapper(typeof(Startup));
                 
         }
 

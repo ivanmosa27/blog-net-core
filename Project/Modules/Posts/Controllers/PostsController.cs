@@ -1,6 +1,7 @@
 ﻿using blog_net_core.Project;
 using blog_net_core.Project.Modules.Posts.Model.Entities;
 using blog_net_core.Project.Modules.Posts.Services;
+using blog_net_core.Project.Modules.Posts.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -58,9 +59,9 @@ namespace blog_net_core.Controllers
         /// <returns></returns>
         [Route("")]
         [HttpPost]
-         public async Task<Microsoft.AspNetCore.Mvc.ActionResult> Create(Post post)
+         public async Task<Microsoft.AspNetCore.Mvc.ActionResult> Create([FromBody] CreatePostDto createPostDto)
         {
-            var postCreated = await _postService.addPost(post);
+            var postCreated = await _postService.addPost(createPostDto);
             return Ok(postCreated);
 
         }
