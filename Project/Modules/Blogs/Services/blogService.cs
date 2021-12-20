@@ -1,4 +1,5 @@
 using blog_net_core.Project.Modules.Blogs.Model.Entities;
+using blog_net_core.Project.Framework;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,24 +18,24 @@ namespace blog_net_core.Project.Modules.Blogs.Services{
 
                 _dbContext = dbContext;
         }
-
+            /// <inheritdoc > Implemented using the blog service interface.</inheritdoc>
             public async Task<Blog> getBlogById(int id){
 
-                var blog = await _dbContext.blogs.Include(x => x.post).FirstOrDefaultAsync(x => x.BlogId == id);
+                var blog = await _dbContext.Blogs.Include(x => x.post).FirstOrDefaultAsync(x => x.BlogId == id);
                 return blog;
             }
-
-            public async Task<String> createBlog(Blog blog){
+            /// <inheritdoc > Implemented using the blog service interface.</inheritdoc>
+            public async Task<Blog> createBlog(Blog blog){
 
                 var existsPost = await _dbContext.Posts.AnyAsync(x => x.PostId == blog.postId);
                 
                 if(!existsPost){
-                    return($"The post with ID: {blog.postId}, doesn't exist.");
+                   
                 }
                 _dbContext.Add(blog);
                 blog.CreatedAt = DateTime.Today;
                 await _dbContext.SaveChangesAsync();
-                return("Blog created succefully!");                
+                return blog;                
             }
 
     }

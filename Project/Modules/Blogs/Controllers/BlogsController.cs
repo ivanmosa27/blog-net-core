@@ -18,7 +18,9 @@ namespace blog_net_core.Controllers
         /// <summary>
         /// The constructor of the BlogController.
         /// </summary>
-        /// <param name="blogService"></param>
+        /// <param name="blogService">
+        /// The blog service to process the blogs requests
+        /// </param>
         public BlogsController(IBlogService blogService)
         {
             _blogService = blogService;
@@ -27,27 +29,35 @@ namespace blog_net_core.Controllers
         /// <summary>
         /// Get all Blogs.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">
+        /// The id of the blog we want to collect.
+        /// </param>
+        /// <returns>
+        /// Return the Blog searched.
+        /// </returns>
         [Route("{id:int}")]
         [HttpGet]
-        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> Get(int id)
+        public async Task<Blog> Get(int id)
         {
-            var blog = await _blogService.getBlogById(id); 
-            return Ok(blog);
+            return await _blogService.getBlogById(id).ConfigureAwait(false); 
+            
         }
 
         /// <summary>
         /// Create a new Blog.
         /// </summary>
-        /// <param name="blog"></param>
-        /// <returns></returns>
+        /// <param name="blog">
+        /// The structure of the Blog for create new Blog.
+        /// </param>
+        /// <returns>
+        /// Returns the Blog created.
+        /// </returns>
         [Route("")]
         [HttpPost]
-        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> Create(Blog blog)
+        public async Task<Blog> Create(Blog blog)
         {
-            var blogCreated = await _blogService.createBlog(blog);
-            return Ok(blogCreated);
+            return await _blogService.createBlog(blog).ConfigureAwait(false);
+            
         }
 
     }

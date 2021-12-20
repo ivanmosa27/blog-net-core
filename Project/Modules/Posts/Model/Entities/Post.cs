@@ -9,15 +9,44 @@ using System.ComponentModel.DataAnnotations;
 
 namespace blog_net_core.Project.Modules.Posts.Model.Entities
 {
+    /// <summary>
+    /// A static class that contains the db specifications fields of the post entity.
+    /// </summary>
     public partial class Post
     {
+        /// <summary>
+        ///  Identifier from Post.
+        /// </summary>
         public int PostId { get; set; }
-        [Required(ErrorMessage = "El campo {0} es requerido")]
+
+        /// <summary>
+        /// Post name.
+        /// </summary>
         public string PostName { get; set; }
+
+        /// <summary>
+        /// Post description.
+        /// </summary>
         public string PostDescription { get; set; }
+
+        /// <summary>
+        /// Creation date.
+        /// </summary>
         public DateTime? CreatedAt { get; set; }
+
+        /// <summary>
+        /// Post modification date.
+        /// </summary>
         public DateTime? UpdatedAt { get; set; }
+
+        /// <summary>
+        /// Date od deletion.
+        /// </summary>
         public DateTime? DeletedAt { get; set; }
+
+        /// <summary>
+        /// Blog to which a post belongs
+        /// </summary>
         public List<Blog> blogs {get;set;}
     }
 }

@@ -9,42 +9,59 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace blog_net_core.Project.Modules.Posts.Services
 {
-    //Interfaz del servicio para poder inyectar en controlador.
     public interface IPostService
     {
         /// <summary>
         /// Get all the posts from the DB.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// Return a List of all posts.
+        /// </returns>
         Task<List<Post>> getAllPosts();
         
         /// <summary>
         /// Get post for id from BD.
         /// </summary>
-        /// <param name="postId"></param>
-        /// <returns></returns>
+        /// <param name="postId">
+        /// The id of post searched.
+        /// </param>
+        /// <returns>
+        /// Return the post searched by id.
+        /// </returns>
         Task<Post> getPostById(int postId);
 
         /// <summary>
         /// Add new post to BD.
         /// </summary>
-        /// <param name="post"></param>
-        /// <returns></returns>
+        /// <param name="createPostDto">
+        /// The information about the Post to create.
+        /// </param>
+        /// <returns>
+        /// Return the post created.
+        /// </returns>
         Task<Post> addPost(CreatePostDto createPostDto);
 
         /// <summary>
         /// Update post from BD.
         /// </summary>
-        /// <param name="post"></param>
+        /// <param name="updatePostDto">
+        /// The information about the Post to update.
+        /// </param>
         /// <param name="id"></param>
-        /// <returns></returns>
-        Task<Post> updatePost(Post post,int id);
+        /// <returns>
+        /// Return the post updated.
+        /// </returns>
+        Task<Post> updatePost(UpdatePostDto updatePostDto, int id);
 
         /// <summary>
         /// Delete a post from BD.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">
+        /// The id of post searched.
+        /// </param>
+        /// <returns>
+        /// Return the post deleted.
+        /// </returns>
         Task<Post> delete(int id);
     }
 }

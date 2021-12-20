@@ -11,11 +11,42 @@ using AutoMapper;
 
 namespace blog_net_core.Project.Modules.Posts.Mappers
 {
+    /// <summary>
+    /// This class add methods to transform the different company models into another.
+    /// </summary>
     public class PostMappers : Profile
     {
+     
         public PostMappers()
         {
+            /// <summary>
+            /// Mapper CreatePostDto => Post.
+            /// </summary>
+            /// <typeparam name="CreatePostDto">
+            /// Origin Map.
+            /// </typeparam>
+            /// <typeparam name="Post">
+            /// Destination Map.
+            /// </typeparam>
+            /// <returns>
+            /// The post Mapped.
+            /// </returns>
             CreateMap<CreatePostDto, Post>();
+
+            /// <summary>
+            /// Mapper Post => UpdatePostDto.
+            /// </summary>
+            /// <typeparam name="UpdatePostDto">
+            /// Origin Map.
+            /// </typeparam>
+            /// <typeparam name="Post">
+            /// Destination Map.
+            /// </typeparam>
+            /// <returns>
+            /// The post Mapped.
+            /// </returns>
+            CreateMap<UpdatePostDto, Post>();
+            
         }   
     }
 }

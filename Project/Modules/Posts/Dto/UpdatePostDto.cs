@@ -9,19 +9,18 @@ using System.ComponentModel.DataAnnotations;
 namespace blog_net_core.Project.Modules.Posts.Dto
 {
     /// <summary>
-    /// DTO to create a Post.
+    /// DTO to update a post.
     /// </summary>
-    public class CreatePostDto
+    public class UpdatePostDto
     {
         /// <summary>
-        /// The postName field. This field are required.
+        /// The postName field.
         /// </summary>
-        [Required(ErrorMessage = "El campo {0} es requerido")]
-        public string postName { get; set; }
+        public string PostName { get; set; }
 
         /// <summary>
-        /// The postDescription field.
+        /// The postDescription field. 
         /// </summary>
-        public string postDescription { get; set; }
+        public string PostDescription { get; set; }
     }
 }

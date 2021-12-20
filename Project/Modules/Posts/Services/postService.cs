@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using blog_net_core.Project.Modules.Posts.Model.Entities;
+using blog_net_core.Project.Framework;
 using blog_net_core.Project.Modules.Posts.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,32 +24,45 @@ namespace blog_net_core.Project.Modules.Posts.Services{
             this.mapper = mapper;
         }
 
+        /// <inheritdoc > Implemented using the blog service interface.</inheritdoc>
         public async Task<List<Post>> getAllPosts()
         {
             return await _dbContext.Posts.ToListAsync();
         }
 
+        /// <inheritdoc > Implemented using the blog service interface.</inheritdoc>
         public async Task<Post> getPostById(int postId)
         {
             return await _dbContext.Posts.FirstOrDefaultAsync(x => x.PostId == postId);    
         }
         
+        /// <inheritdoc > Implemented using the blog service interface.</inheritdoc>
         public async Task<Post> addPost(CreatePostDto createPostDto)
         {
+
             var post = mapper.Map<Post>(createPostDto);
             _dbContext.Add(post);
             post.CreatedAt = DateTime.Today;
             await _dbContext.SaveChangesAsync();
             return post;
+            
         }
 
-        public async Task<Post> updatePost(Post post, int id)
+        /// <inheritdoc > Implemented using the blog service interface.</inheritdoc>
+        public async Task<Post> updatePost(UpdatePostDto updatePostDto, int id)
         {
-            _dbContext.Update(post);
-            post.UpdatedAt = DateTime.Today;
+            var postDB = await _dbContext.Posts.FirstOrDefaultAsync(x => x.PostId == id);
+            postDB = mapper.Map(updatePostDto,postDB);
+
+            //var post = mapper.Map<Post>(updatePostDto);
+
+            //_dbContext.Update(post);
+            //post.UpdatedAt = DateTime.Today;
             await _dbContext.SaveChangesAsync();
-            return post;
+            return postDB;
         }
+
+        /// <inheritdoc > Implemented using the blog service interface.</inheritdoc>
         public async Task<Post> delete(int id)
         {
             var post = await _dbContext.Posts.FirstOrDefaultAsync(x => x.PostId == id);

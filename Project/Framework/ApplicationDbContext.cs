@@ -4,7 +4,7 @@ using blog_net_core.Project.Modules.Blogs.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace blog_net_core.Project
+namespace blog_net_core.Project.Framework
 {
     public partial class ApplicationDbContext : DbContext
     {
@@ -14,7 +14,7 @@ namespace blog_net_core.Project
         }
 
         public DbSet<Post> Posts { get; set; }
-        public DbSet<Blog> blogs {get;set;}
+        public DbSet<Blog> Blogs {get;set;}
 
     }
 }

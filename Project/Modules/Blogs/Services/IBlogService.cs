@@ -7,22 +7,30 @@ using blog_net_core.Project.Modules.Blogs.Model.Entities;
 
 namespace blog_net_core.Project.Modules.Blogs.Services
 {
-    //Interfaz del servicio para poder inyectar en controlador.
+    
     public interface IBlogService
     {
         /// <summary>
-        /// Get blog for id from BD.
+        /// Get blog by id.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">
+        /// The id of the blog we want to collect.
+        /// </param>
+        /// <returns>
+        /// Return the Blog searched.
+        /// </returns>
         Task<Blog> getBlogById(int id);
 
         /// <summary>
         /// Add a new blog to BD.
         /// </summary>
-        /// <param name="blog"></param>
-        /// <returns></returns>
-        Task<String> createBlog(Blog blog);
+        /// <param name="blog">
+        /// The structure of the Blog for create new Blog.
+        /// </param>
+        /// <returns>
+        /// Return the Blog created.
+        /// </returns>
+        Task<Blog> createBlog(Blog blog);
 
     }
 }

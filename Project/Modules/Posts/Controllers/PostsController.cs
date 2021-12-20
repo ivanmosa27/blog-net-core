@@ -21,7 +21,9 @@ namespace blog_net_core.Controllers
         /// <summary>
         /// The constructor of the PostController.
         /// </summary>
-        /// <param name="postService"></param>
+        /// <param name="postService">
+        /// The post service will be used to create the posts synchronously.
+        /// </param>
         public PostsController(IPostService postService)
         {
             _postService = postService;
@@ -30,69 +32,81 @@ namespace blog_net_core.Controllers
         /// <summary>
         /// Get all posts.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// Return all posts.
+        /// </returns>
         [Route("")]
         [HttpGet]
-        public async Task<ActionResult<List<Post>>> GetAll()
+        public async Task<List<Post>> GetAll()
         {
-            var posts = await _postService.getAllPosts();
-            return Ok(posts);
+            return await _postService.getAllPosts();
         }
 
         /// <summary>
         /// Get Post by ID.
         /// </summary>
-        /// <param name="postId"></param>
-        /// <returns></returns>
+        /// <param name="postId">
+        /// The id of post searched.
+        /// </param>
+        /// <returns>
+        /// Return the post searched by id.
+        /// </returns>
         [Route("{postId:int}")]
         [HttpGet]
-        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> Get(int postId)
+        public async Task<Post> Get(int postId)
         {
-            var post = await _postService.getPostById(postId); 
-            return Ok(post);
+            return await _postService.getPostById(postId); 
         }
 
         /// <summary>
         /// Create a new Post.
         /// </summary>
-        /// <param name="post"></param>
-        /// <returns></returns>
+        /// <param name="createPostDto">
+        ///  The information about the Post to create.
+        /// </param>
+        /// <returns>
+        /// Return the Post created.
+        /// </returns>
         [Route("")]
         [HttpPost]
-         public async Task<Microsoft.AspNetCore.Mvc.ActionResult> Create([FromBody] CreatePostDto createPostDto)
+         public async Task<Post> Create([FromBody] CreatePostDto createPostDto)
         {
-            var postCreated = await _postService.addPost(createPostDto);
-            return Ok(postCreated);
-
+            return await _postService.addPost(createPostDto);
         }
 
         /// <summary>
         /// Update Post by ID.
         /// </summary>
-        /// <param name="post"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="UpdatePostDto">
+        /// The information about the Post to update.
+        /// </param>
+        /// <param name="id">
+        /// The id to the post for update.
+        /// </param>
+        /// <returns>
+        /// Return the post updated.
+        /// </returns>
         [Route("")]
         [HttpPut]
-        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> Update(Post post, int id)
+        public async Task<Post> Update([FromBody] UpdatePostDto updatePostDto, int id)
         {
-            var postUpdated = await _postService.updatePost(post,id);
-            return Ok(postUpdated);
-            
+            return await _postService.updatePost(updatePostDto,id); 
         }
 
         /// <summary>
         /// Delete Post by ID.
         /// </summary>
-        /// <param name="postId"></param>
-        /// <returns></returns>
+        /// <param name="postId">
+        /// The id of post searched.
+        /// </param>
+        /// <returns>
+        /// The post Deleted.
+        /// </returns>
         [Route("")]
         [HttpDelete]
-        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> SoftDelete(int postId)
+        public async Task<Post> SoftDelete(int postId)
         {
-            var post = await _postService.delete(postId);
-            return Ok(post);
+            return await _postService.delete(postId);
         }
-
     }
 }

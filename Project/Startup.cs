@@ -1,5 +1,6 @@
 using blog_net_core.Project.Modules.Posts.Services;
 using blog_net_core.Project.Modules.Blogs.Services;
+using blog_net_core.Project.Framework;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
