@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using blog_net_core.Project.Modules.Posts.Model.Entities;
+using blog_net_core.Project.Modules.Shared.Extensions;
 using blog_net_core.Project.Modules.Posts.Dto;
 using System.ComponentModel.DataAnnotations;
 using AutoMapper;
@@ -14,39 +15,25 @@ namespace blog_net_core.Project.Modules.Posts.Mappers
     /// <summary>
     /// This class add methods to transform the different company models into another.
     /// </summary>
-    public class PostMappers : Profile
+    public static class PostMappers
     {
-     
-        public PostMappers()
+        public static Post MergeWithUpdatePost(
+            this Post @this,
+            UpdatePostDto updatePostDto
+        )
         {
-            /// <summary>
-            /// Mapper CreatePostDto => Post.
-            /// </summary>
-            /// <typeparam name="CreatePostDto">
-            /// Origin Map.
-            /// </typeparam>
-            /// <typeparam name="Post">
-            /// Destination Map.
-            /// </typeparam>
-            /// <returns>
-            /// The post Mapped.
-            /// </returns>
-            CreateMap<CreatePostDto, Post>();
+            var model = new Post()
+            {
+                
+                PostName = updatePostDto.PostName ?? @this.PostName,
+                PostDescription = updatePostDto.PostDescription ?? @this.PostDescription,
 
-            /// <summary>
-            /// Mapper Post => UpdatePostDto.
-            /// </summary>
-            /// <typeparam name="UpdatePostDto">
-            /// Origin Map.
-            /// </typeparam>
-            /// <typeparam name="Post">
-            /// Destination Map.
-            /// </typeparam>
-            /// <returns>
-            /// The post Mapped.
-            /// </returns>
-            CreateMap<UpdatePostDto, Post>();
+                // Immutable fields:
+                PostId = @this.PostId
             
-        }   
+            };
+            @this.MergeEntityWith(model);
+            return @this;
+        }
     }
 }

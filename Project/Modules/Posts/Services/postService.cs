@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using blog_net_core.Project.Modules.Posts.Model.Entities;
+using blog_net_core.Project.Modules.Posts.Mappers;
 using blog_net_core.Project.Framework;
 using blog_net_core.Project.Modules.Posts.Dto;
 using Microsoft.AspNetCore.Http;
@@ -19,7 +20,6 @@ namespace blog_net_core.Project.Modules.Posts.Services{
 
         public postService(ApplicationDbContext dbContext, IMapper mapper)
         {
-
             _dbContext = dbContext;
             this.mapper = mapper;
         }
@@ -33,7 +33,7 @@ namespace blog_net_core.Project.Modules.Posts.Services{
         /// <inheritdoc > Implemented using the blog service interface.</inheritdoc>
         public async Task<Post> getPostById(int postId)
         {
-            return await _dbContext.Posts.FirstOrDefaultAsync(x => x.PostId == postId);    
+            return await _dbContext.Posts.FirstOrDefaultAsync(x => x.PostId == postId);
         }
         
         /// <inheritdoc > Implemented using the blog service interface.</inheritdoc>
@@ -51,15 +51,12 @@ namespace blog_net_core.Project.Modules.Posts.Services{
         /// <inheritdoc > Implemented using the blog service interface.</inheritdoc>
         public async Task<Post> updatePost(UpdatePostDto updatePostDto, int id)
         {
-            var postDB = await _dbContext.Posts.FirstOrDefaultAsync(x => x.PostId == id);
-            postDB = mapper.Map(updatePostDto,postDB);
-
-            //var post = mapper.Map<Post>(updatePostDto);
-
-            //_dbContext.Update(post);
-            //post.UpdatedAt = DateTime.Today;
+            var post = await getPostById(id);
+            post.MergeWithUpdatePost(updatePostDto);
+            post.UpdatedAt = DateTime.Today;
+            _dbContext.Update(post);
             await _dbContext.SaveChangesAsync();
-            return postDB;
+            return post;
         }
 
         /// <inheritdoc > Implemented using the blog service interface.</inheritdoc>
