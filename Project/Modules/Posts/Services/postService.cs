@@ -17,11 +17,10 @@ namespace blog_net_core.Project.Modules.Posts.Services{
 
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper mapper;
-
         public postService(ApplicationDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
-            this.mapper = mapper;
+            this.mapper = mapper;            
         }
 
         /// <inheritdoc > Implemented using the blog service interface.</inheritdoc>
@@ -39,13 +38,11 @@ namespace blog_net_core.Project.Modules.Posts.Services{
         /// <inheritdoc > Implemented using the blog service interface.</inheritdoc>
         public async Task<Post> addPost(CreatePostDto createPostDto)
         {
-
-            var post = mapper.Map<Post>(createPostDto);
-            _dbContext.Add(post);
+            Post post = createPostDto.ToPost();
             post.CreatedAt = DateTime.Today;
+            _dbContext.Add(post);
             await _dbContext.SaveChangesAsync();
             return post;
-            
         }
 
         /// <inheritdoc > Implemented using the blog service interface.</inheritdoc>

@@ -6,22 +6,22 @@ using System.ComponentModel.DataAnnotations;
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace blog_net_core.Project.Modules.Posts.Dto
+namespace blog_net_core.Project.Modules.Blogs.Dto
 {
     /// <summary>
     /// DTO to create a Post.
     /// </summary>
-    public class CreatePostDto
+    public class CreateBlogDto
     {
         /// <summary>
         /// The postName field. This field are required.
         /// </summary>
         [Required(ErrorMessage = "El campo {0} es requerido")]
-        public string PostName { get; set; }
+        public string postName { get; set; }
 
         /// <summary>
         /// The postDescription field.
         /// </summary>
-        public string PostDescription { get; set; }
+        public string postDescription { get; set; }
     }
 }

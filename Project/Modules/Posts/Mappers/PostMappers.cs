@@ -35,5 +35,19 @@ namespace blog_net_core.Project.Modules.Posts.Mappers
             @this.MergeEntityWith(model);
             return @this;
         }
+
+        /// <summary>
+        /// Mapper: CreatePostDto => Post
+        /// </summary>
+        /// <returns>The Post mapped.</returns>
+        public static Post ToPost(this CreatePostDto @this)
+        {
+            var model = new Post()
+            {
+                PostName = @this.PostName,
+                PostDescription = @this.PostDescription
+            };
+            return model;
+        }
     }
 }
