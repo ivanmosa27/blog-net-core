@@ -8,6 +8,6 @@
   },
   "AllowedHosts": "*",
   "ConnectionStrings": {
-    "LocalDB": "Server=(localdb)\\MSSQLLocalDB;Database=BLOG;Trusted_Connection=True;MultipleActiveResultSets=True;"
+    "LocalDB": ""
   }
 }
