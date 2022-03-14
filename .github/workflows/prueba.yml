@@ -1,19 +1,14 @@
 on:
   push:
     branches:
-      - develop
+      - develop      
 jobs:
   build:
-    runs-on: windows-latest
-    steps:
-    - uses: actions/checkout@v2
-inputs:
-  name: 
-    description: 'Your name'
-    default: 'No name provided'
-runs:
-  using: "composite"
+    runs-on: windows-latest  
+    name: BuildPre
   steps: 
+    - name: BuildPre
+      uses: actions/checkout@v2
     - run: echo Hello.
       shell: bash
     - run: echo "Nice to meet you!"
