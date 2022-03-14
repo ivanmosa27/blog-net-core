@@ -40,6 +40,11 @@ namespace blog_net_core.Controllers
             return Ok(post);
         }
 
+        /// <summary>
+        /// The create method.
+        /// </summary>
+        /// <param name="model">the model.</param>
+        /// <returns></returns>
         [Route("Create")]
         [HttpPost]
         public IActionResult Create(PostModel model)
