@@ -9,7 +9,7 @@ jobs:
     steps:
     - name: BuildPre
       uses: actions/checkout@v2
-    - run: ls -la
+    - run: cd .github/workflows
       shell: bash
     - run: prueba.sh
       shell: bash
