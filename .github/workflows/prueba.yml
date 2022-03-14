@@ -3,10 +3,10 @@ on:
     branches:
       - develop      
 jobs:
-  build:
+  BuildPre:
     runs-on: windows-latest  
     name: BuildPre
-  steps: 
+    steps:
     - name: BuildPre
       uses: actions/checkout@v2
     - run: echo Hello.
