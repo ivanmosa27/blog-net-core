@@ -1,1 +1,0 @@
-echo "¡Hola Ivan eres el puto amo por si no lo sabias!"
