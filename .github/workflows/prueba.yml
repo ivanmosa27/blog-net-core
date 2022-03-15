@@ -10,4 +10,4 @@ jobs:
     - name: BuildPre
       uses: actions/checkout@v2
     - run: prueba.bat
-      shell: powershell
+      shell: pwsh
