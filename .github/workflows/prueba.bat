@@ -1,1 +1,2 @@
-echo "¡Hola Ivan eres el puto amo por si no lo sabias!"
+@echo off
+echo Hola Mundo
