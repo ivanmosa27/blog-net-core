@@ -9,5 +9,5 @@ jobs:
     steps:
     - name: BuildPre
       uses: actions/checkout@v2
-    - run: .\prueba.bat
+    - run: echo Ivan
       shell: cmd
